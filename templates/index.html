@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Form</title>
+    <style>
+        body {
+            background-color: rgb(224, 219, 219);
+            align-self: center;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            display: flex;
+        }
+        h2 {
+            color: rgb(3, 3, 3);
+            font-size: 30px;
+            font-style: italic;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        form {
+          align-items: center;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            width: 300px;
+            align-content: center;
+        }
+        select {
+            width: 200px; 
+            height: 25px;
+            font-size: 15px;
+        }
+        input{
+          
+            width: 200px; 
+            height: 20px;
+            border-radius: 2px;
+        }
+        label {
+          
+          display: inline-block;
+          width: 200px;
+          text-align: left;
+        }
+        button {
+            
+            padding-bottom: 20px ; 
+            width: 200px;
+            height: 20px;
+            margin-top: 5px;
+            color:white;
+            background-color: rgb(4, 63, 73);
+            border-radius: 10px;
+        }
+        </style>
+</head>
+<body>
+    <h1>Friend Details</h1>
+    <form action="/process-friend" method="post">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br><br>
+        <label for="dob">Date of Birth :</label>
+        <input type="text" id="dob" name="dob" required><br><br>
+        <label for="category">Category:</label>
+        <select id="category" name="category" required>
+            <option value="--select--">---- Select category ----</option>
+            <option value="school">School</option>
+            <option value="college">College</option>
+            <option value="tuition">Tuition</option>
+        </select><br><br>
+        <label for="action">Action:</label>
+        <select id="action" name="action" required>
+            <option value="--select--">----Select Action ----</option>
+            <option value="create">Create</option>
+            <option value="update">Update</option>
+            <option value="delete">Delete</option>
+        </select><br><br>
+        <button type="submit" value="Submit">Submit</button>
+    </form>
+</body>
+</html>
