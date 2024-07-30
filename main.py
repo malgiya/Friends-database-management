@@ -55,6 +55,7 @@ def manage_friend(db: Session, name: str, dob: str, category: str, action: str):
             raise HTTPException(status_code=400, detail="Invalid action. Choose 'create', 'update', or 'delete'.")
 
     except Exception as e:
+        print(f"Error occurred: {str(e)}")
         raise HTTPException(status_code=500, detail=f"Internal Server Error: {str(e)}")
 templates = Jinja2Templates(directory="templates")
 
@@ -89,6 +90,7 @@ async def process_friend(
     except HTTPException as e:
         return HTMLResponse(content=f"<h1>Error: {e.detail}</h1>", status_code=e.status_code)
     except Exception as e:
+        print(f"Error occurred: {str(e)}")
         return HTMLResponse(content=f"<h1>Internal Server Error: {str(e)}</h1>", status_code=500)
     finally:
         db.close()
@@ -104,6 +106,7 @@ async def view_all(request: Request):
             "friends": friends
         }
     except Exception as e:
+        print(f"Error occurred: {str(e)}")
         return HTMLResponse(content=f"<h1>Internal Server Error: {str(e)}</h1>", status_code=500)
     finally:
         db.close()
