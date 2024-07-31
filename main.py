@@ -6,7 +6,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, Session
 from pydantic import BaseModel
 from pymongo import MongoClient
-
+import time
 import os
 import logging
 
@@ -16,6 +16,19 @@ SQLALCHEMY_DATABASE_URL = os.getenv("DATABASE_URL", "mysql+pymysql://root:root@l
 engine = create_engine(SQLALCHEMY_DATABASE_URL, pool_pre_ping=True)  # Example of connection pooling
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
+logging.basicConfig(level=logging.INFO)
+
+def handler(request):
+    start_time = time.time()
+    logging.info("Starting processing")
+    
+    # Example logic: Simple response
+    response = {"message": "Hello, world!"}
+    
+    end_time = time.time()
+    logging.info(f"Processing time: {end_time - start_time} seconds")
+    
+    return response
 # Logging configuration
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
