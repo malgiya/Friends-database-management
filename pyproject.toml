@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+# Additional setuptools options can go here
+
+[project]
+name = "PUT FRNDS"
+version = "0.1.0"
+description = "Your project description"
+dependencies = [
+    "fastapi",
+    "uvicorn",
+    "sqlalchemy",
+    "pydantic",
+    "jinja2",
+    "mysqlclient",
+    "python-dotenv"
+]
