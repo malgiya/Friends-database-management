@@ -5,11 +5,9 @@ from sqlalchemy import create_engine, Column, Integer, String, Date
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, Session
 from pydantic import BaseModel
-from pymongo import MongoClient
-import time
 import os
 import logging
-
+import time
 
 # Environment variables and configuration
 SQLALCHEMY_DATABASE_URL = os.getenv("DATABASE_URL", "mysql+pymysql://root:root@localhost/frndsdb")
@@ -17,23 +15,10 @@ engine = create_engine(SQLALCHEMY_DATABASE_URL, pool_pre_ping=True)  # Example o
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 logging.basicConfig(level=logging.INFO)
-
-def handler(request):
-    start_time = time.time()
-    logging.info("Starting processing")
-    
-    # Example logic: Simple response
-    response = {"message": "Hello, world!"}
-    
-    end_time = time.time()
-    logging.info(f"Processing time: {end_time - start_time} seconds")
-    
-    return response
-# Logging configuration
-logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 app = FastAPI()
+templates = Jinja2Templates(directory="templates")
 
 Base = declarative_base()
 
@@ -84,8 +69,6 @@ def manage_friend(db: Session, name: str, dob: str, category: str, action: str):
         logger.error(f"Error occurred: {str(e)}")
         raise HTTPException(status_code=500, detail="Internal Server Error")
 
-templates = Jinja2Templates(directory="templates")
-
 @app.get("/", response_class=HTMLResponse)
 async def read_form(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
@@ -134,3 +117,8 @@ async def view_all(request: Request):
         db.close()
     
     return templates.TemplateResponse("all_records.html", context)
+
+if __name__ == "__main__":
+    import uvicorn
+    port = int(os.getenv("PORT", 10000))  # Use the PORT environment variable or default to 10000
+    uvicorn.run(app, host="0.0.0.0", port=port)
