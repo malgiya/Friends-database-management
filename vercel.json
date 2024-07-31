@@ -14,7 +14,7 @@
   ],
   "functions": {
     "main.py": {
-      "maxDuration": 60 // Increase this as needed
+      "maxDuration": 60 
     }
   }
 }
