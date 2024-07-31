@@ -3,6 +3,6 @@ uvicorn
 sqlalchemy
 pydantic
 jinja2
-mysqlclient
+pymysql
 python-dotenv
 pymongo
